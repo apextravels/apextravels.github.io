@@ -1,11 +1,18 @@
 (function () {
-  const phone = "92320797715";
+  const phone = "923230797715";
   const defaultMessage = "Hello APEX TRAVELS, I would like to inquire about visa services.";
 
   const waUrl = (text) => {
     const encoded = encodeURIComponent(text);
     return `https://wa.me/${phone}?text=${encoded}`;
   };
+
+  const isValidWaPhone = (raw) => /^[1-9]\d{7,14}$/.test(raw);
+  if (!isValidWaPhone(phone)) {
+    console.warn(
+      `[APEX TRAVELS] Invalid WhatsApp phone format. Use E.164 digits only without "+". Received: "${phone}"`
+    );
+  }
 
   const setHref = (id, href) => {
     const el = document.getElementById(id);
